@@ -42,17 +42,17 @@
 
         {% if usuario_logueado and kito.votable %}
 
-        <form action="votar_mas_uno" method="POST">
+        <form action="votar_mas_uno" method="POST" style="display: inline;">
            
             <input type="hidden" name="kito" value="{{kito.texto}}">
             <input type="submit" value="+1">
 
         </form>
 
-        <form action="votar_menos_uno" method="POST">
+        <form action="votar_menos_uno" method="POST" style="display: inline;">
            
             <input type="hidden" name="kito" value="{{kito.texto}}">
-            <input type="submit" value="-1">
+            <input type="submit" value="-1" style="display: inline;">
 
         </form>
         {% endif %}
