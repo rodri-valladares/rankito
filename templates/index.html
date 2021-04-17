@@ -21,7 +21,7 @@
             <label for="kito">Kito</label>
             <input type="text" id="kito" name="kito">
 
-            <input type="submit" value="Kitear">
+            <input type="submit" value="Kittear">
         
         </form>
         <div class="buttons">
@@ -40,7 +40,7 @@
 
         <h3>{{ kito.texto }} => {{ kito.puntaje }}</h3>
 
-        {% if kito.votable %}
+        {% if usuario_logueado and kito.votable %}
 
         <form action="votar_mas_uno" method="POST">
            
