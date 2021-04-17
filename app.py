@@ -99,3 +99,9 @@ def votar_menos_uno():
     db.zincrby("rankito",-1,kito)
 
     return redirect("/")
+
+@app.route("/logout")
+def cerrar_sesion():
+    respuesta=make_response(redirect("/"))
+    respuesta.delete_cookie("usuario_logueado")
+    return respuesta
