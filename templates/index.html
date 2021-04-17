@@ -38,12 +38,19 @@
 
         <h3>{{ kito.texto }} => {{ kito.puntaje }}</h3>
 
-        {% if votable %}
+        {% if kito.votable %}
 
         <form action="votar_mas_uno" method="POST">
            
             <input type="hidden" name="kito" value="{{kito.texto}}">
             <input type="submit" value="+1">
+
+        </form>
+
+        <form action="votar_menos_uno" method="POST">
+           
+            <input type="hidden" name="kito" value="{{kito.texto}}">
+            <input type="submit" value="-1">
 
         </form>
         {% endif %}

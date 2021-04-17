@@ -90,3 +90,12 @@ def votar_mas_uno():
     db.zincrby("rankito",1,kito)
 
     return redirect("/")
+
+
+@app.route("/votar_menos_uno", methods=["POST"])
+def votar_menos_uno():
+
+    kito = request.form.get("kito")
+    db.zincrby("rankito",-1,kito)
+
+    return redirect("/")
