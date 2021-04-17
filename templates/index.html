@@ -1,31 +1,26 @@
-<html>
-    <head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
-    </head>
-    <body>
-        <h1>Comparte lo que piensas con RANKITO</h1>
-        {% if usuario_logueado %}
-        {% else %}
-        <a href="crear_usuario" 
-        style="border-radius: 5rem;
-        padding: 1rem;
-        display: inline-block;
-        width: 200px;
-        font-weight: bold;
-        text-align: center;
-        text-decoration: none;
-        background-color: aquamarine; 
-        color:white"> Crear usuario</a> <br>
-        <br>
-        <a href="ingreso_usuario" style="border-radius: 5rem;
-        padding: 1rem;
-        display: inline-block;
-        width: 200px;
-        font-weight: bold;
-        text-align: center;
-        text-decoration: none;
-        background-color: aquamarine; 
-        color:white"> Iniciar sesión</a>
-        {% endif %}
-    </body>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
+    
+    <title>Rankito</title>
+
+</head>
+<body>
+
+    <h1 class="titulo-inicio">Comparte lo que piensas con RANKITO</h1>
+    {% if usuario_logueado %}
+    {% else %}
+    <div class="buttons">
+        <a href="crear_usuario"> Crear usuario</a> 
+        <a href="ingreso_usuario"> Iniciar sesión</a>
+    </div>
+    {% endif %}
+    <img class="rankito-img" src="{{ url_for('static', filename='rankito-img.png') }}" alt="..">
+
+</body>
 </html>

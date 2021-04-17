@@ -1,0 +1,35 @@
+body {
+  background-color: #d8e3e7;
+  text-align: center;
+}
+
+a {
+  border-radius: 5rem;
+  padding: 1rem;
+  display: inline-block;
+  width: 200px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  background-color: aquamarine;
+  color: white;
+}
+
+a:hover {
+  color: #51c4d3;
+}
+
+/* ------------- CLASS SELECTORS ------------- */
+.buttons {
+  margin: 20px;
+}
+
+.rankito-img {
+  width: 500px;
+  height: 500px;
+}
+
+.titulo-inicio {
+  font-family: "Zen Dots", cursive;
+  font-size: 5rem;
+}
