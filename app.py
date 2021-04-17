@@ -7,9 +7,11 @@ app = Flask(__name__)
 
 db = redis.from_url(os.environ["REDISCLOUD_URL"])
 
+
 @app.route("/limpiar")
 def limpiar():
     db.delete("rankito")
+
 
 @app.route("/")
 def home():
@@ -22,7 +24,7 @@ def home():
         texto = dato[0].decode("utf-8")
         puntaje = int(dato[1])
         votable = usuario_logueado != db.get(texto).decode("utf-8")
-        kito = {"texto": texto, "puntaje": puntaje, "votable":votable}
+        kito = {"texto": texto, "puntaje": puntaje, "votable": votable}
         rankito.append(kito)
 
     return render_template(
@@ -46,7 +48,9 @@ def agregar_usuario():
     else:
         contraseña_hash = generate_password_hash(contraseña, "pbkdf2:sha256")
         db.set("user:" + nombre, contraseña_hash)
-        return redirect("/")
+        respuesta = make_response(redirect("/"))
+        respuesta.set_cookie("usuario_logueado", nombre)
+        return respuesta
 
 
 @app.route("/ingreso_usuario")
@@ -80,14 +84,15 @@ def crear_kito():
     kito = request.form.get("kito")
     db.zadd("rankito", {kito: 0})
 
-    db.set(kito,request.cookies.get("usuario_logueado"))
+    db.set(kito, request.cookies.get("usuario_logueado"))
     return redirect("/")
+
 
 @app.route("/votar_mas_uno", methods=["POST"])
 def votar_mas_uno():
 
     kito = request.form.get("kito")
-    db.zincrby("rankito",1,kito)
+    db.zincrby("rankito", 1, kito)
 
     return redirect("/")
 
@@ -96,12 +101,13 @@ def votar_mas_uno():
 def votar_menos_uno():
 
     kito = request.form.get("kito")
-    db.zincrby("rankito",-1,kito)
+    db.zincrby("rankito", -1, kito)
 
     return redirect("/")
 
+
 @app.route("/logout")
 def cerrar_sesion():
-    respuesta=make_response(redirect("/"))
+    respuesta = make_response(redirect("/"))
     respuesta.delete_cookie("usuario_logueado")
     return respuesta
