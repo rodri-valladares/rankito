@@ -12,7 +12,18 @@ db = redis.from_url(os.environ["REDISCLOUD_URL"])
 def home():
     usuario_logueado = request.cookies.get("usuario_logueado")
 
-    return render_template("index.html", usuario_logueado=usuario_logueado)
+    datos = db.zrevrange("rankito", 0, -1, withscores=True)
+    rankito = []
+
+    for dato in datos:
+        texto = dato[0].decode("utf-8")
+        puntaje = int(dato[1])
+        kito = {"texto": texto, "puntaje": puntaje}
+        rankito.append(kito)
+
+    return render_template(
+        "index.html", usuario_logueado=usuario_logueado, rankito=rankito
+    )
 
 
 @app.route("/crear_usuario")

@@ -31,6 +31,15 @@
         <a href="ingreso_usuario"> Iniciar sesión</a>
     </div>
     {% endif %}
+    
+    <br>
+
+    {% for kito in rankito %}
+
+        <h3>{{ kito.texto }} => {{ kito.puntaje }}</h3>
+
+    {% endfor %}
+    
     <img class="rankito-img" src="{{ url_for('static', filename='rankito-img.png') }}" alt="..">
     <h2>No barats</h2>
 
