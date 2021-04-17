@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, make_response
 from werkzeug.security import check_password_hash, generate_password_hash
 import redis
 import os
@@ -9,7 +9,8 @@ db = redis.from_url(os.environ["REDISCLOUD_URL"])
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    usuario_logueado=request.cookies.get("usuario_logueado")
+    return render_template("index.html", usuario_logueado=usuario_logueado)
 
 @app.route("/crear_usuario")
 def nuevo_usuario():
@@ -29,5 +30,25 @@ def agregar_usuario():
         return redirect("/")
 
 
-    
+@app.route("/ingreso_usuario")
+def ingreso_usuario():
+    return render_template("ingreso_usuario.html")
 
+@app.route("/login", methods=["POST"])
+def login():
+    nombre=request.form.get("nombre")
+    contraseña=request.form.get("contraseña")
+
+    try:
+        contraseña_hash=db.get("user:" +nombre).decode("utf-8")
+    except AttributeError as e:
+        error="Contraseña y/o usuario incorrectos"
+        return render_template("ingreso_usuario.html", error=error)
+
+    if check_password_hash(contraseña_hash, contraseña):
+        respuesta=make_response(redirect("/"))
+        respuesta.set_cookie("usuario_logueado", nombre)
+        return respuesta
+    else:
+        error="Contraseña y/o usuario incorrectos"
+        return render_template("ingreso_usuario.html", error=error)

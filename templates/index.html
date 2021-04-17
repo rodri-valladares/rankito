@@ -4,7 +4,9 @@
     </head>
     <body>
         <h1>Comparte lo que piensas con RANKITO</h1>
-        <a href="crear_usuario.html" 
+        {% if usuario_logueado %}
+        {% else %}
+        <a href="crear_usuario" 
         style="border-radius: 5rem;
         padding: 1rem;
         display: inline-block;
@@ -15,7 +17,7 @@
         background-color: aquamarine; 
         color:white"> Crear usuario</a> <br>
         <br>
-        <a href="Ingreso_usuario.html" style="border-radius: 5rem;
+        <a href="ingreso_usuario" style="border-radius: 5rem;
         padding: 1rem;
         display: inline-block;
         width: 200px;
@@ -24,6 +26,6 @@
         text-decoration: none;
         background-color: aquamarine; 
         color:white"> Iniciar sesión</a>
-
+        {% endif %}
     </body>
 </html>
