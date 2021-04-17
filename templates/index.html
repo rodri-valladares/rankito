@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
     
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     
     <title>Rankito</title>
 
@@ -13,7 +13,18 @@
 <body>
 
     <h1 class="titulo-inicio">Comparte lo que piensas con RANKITO</h1>
+    
     {% if usuario_logueado %}
+    
+        <form action="nuevo_kito" method="POST">
+            
+            <label for="kito">Kito</label>
+            <input type="text" id="kito" name="kito">
+
+            <input type="submit" value="Kitear">
+
+        </form>
+
     {% else %}
     <div class="buttons">
         <a href="crear_usuario"> Crear usuario</a> 
@@ -21,6 +32,7 @@
     </div>
     {% endif %}
     <img class="rankito-img" src="{{ url_for('static', filename='rankito-img.png') }}" alt="..">
+    <h2>No barats</h2>
 
 </body>
 </html>
