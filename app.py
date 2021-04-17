@@ -7,6 +7,9 @@ app = Flask(__name__)
 
 db = redis.from_url(os.environ["REDISCLOUD_URL"])
 
+@app.route("/limpiar")
+def limpiar():
+    db.delete("rankito")
 
 @app.route("/")
 def home():
@@ -18,7 +21,8 @@ def home():
     for dato in datos:
         texto = dato[0].decode("utf-8")
         puntaje = int(dato[1])
-        kito = {"texto": texto, "puntaje": puntaje}
+        votable = usuario_logueado != db.get(texto).decode("utf-8")
+        kito = {"texto": texto, "puntaje": puntaje, "votable":votable}
         rankito.append(kito)
 
     return render_template(
@@ -75,5 +79,14 @@ def crear_kito():
 
     kito = request.form.get("kito")
     db.zadd("rankito", {kito: 0})
+
+    db.set(kito,request.cookies.get("usuario_logueado"))
+    return redirect("/")
+
+@app.route("/votar_mas_uno", methods=["POST"])
+def votar_mas_uno():
+
+    kito = request.form.get("kito")
+    db.zincrby("rankito",1,kito)
 
     return redirect("/")

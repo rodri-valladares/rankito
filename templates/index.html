@@ -38,6 +38,15 @@
 
         <h3>{{ kito.texto }} => {{ kito.puntaje }}</h3>
 
+        {% if votable %}
+
+        <form action="votar_mas_uno" method="POST">
+           
+            <input type="hidden" name="kito" value="{{kito.texto}}">
+            <input type="submit" value="+1">
+
+        </form>
+        {% endif %}
     {% endfor %}
     
     <img class="rankito-img" src="{{ url_for('static', filename='rankito-img.png') }}" alt="..">
