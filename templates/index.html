@@ -1,70 +1,99 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends "base.html" %}
 
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
-    
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    
-    <title>Rankito</title>
 
-</head>
-<body>
+{% block title %}
+Rankito - Home
+{% endblock %}
 
-    <h1 class="titulo-inicio">Comparte lo que piensas con RANKITO</h1>
-    
-    {% if usuario_logueado %}
-    
-        <form action="nuevo_kito" method="POST">
-            
-            <label for="kito">Kito</label>
-            <input type="text" id="kito" name="kito">
 
-            <input type="submit" value="Kittear">
-        
-        </form>
-        <div class="buttons">
-            <a href="logout">Cerrar sesión.</a> 
-        </div>
-    {% else %}
-    <div class="buttons">
-        <a href="crear_usuario"> Crear usuario</a> 
-        <a href="ingreso_usuario"> Iniciar sesión</a>
-    </div>
-    {% endif %}
-    
-    <br>
+{% block content %}
 
-    {% for kito in rankito %}
-
-        <h3>{{ kito.texto }} => {{ kito.puntaje }}</h3>
-
-        {% if usuario_logueado and kito.votable %}
-
-        <form action="votar_mas_uno" method="POST" style="display: inline;">
-           
-            <input type="hidden" name="kito" value="{{kito.texto}}">
-            <input type="submit" value="+1">
-
-        </form>
-
-        <form action="votar_menos_uno" method="POST" style="display: inline;">
-           
-            <input type="hidden" name="kito" value="{{kito.texto}}">
-            <input type="submit" value="-1" style="display: inline;">
-
-        </form>
-        {% endif %}
-    {% endfor %}
-
-    <br>
-    <br>
-    
-    <section>
-        <img class="rankito-img" src="{{ url_for('static', filename='rankito-img.png') }}" alt="..">
-        <h2>No barats</h2>
+    <section class="title-section">
+        <h1 class="titulo-inicio">Comparte lo que piensas con <em>RANKITO</em></h1>
     </section>
 
-</body>
-</html>
+    <hr>
+
+    <section class="kitto-section">
+        
+        {% if usuario_logueado %}
+        
+            <div class="nuevo-kito">
+                <form action="nuevo_kito" method="POST">
+                    
+                    <label for="kito">¿Qué querés kittear hoy?</label>
+                    <input id="kito" name="kito">
+
+                    <input type="submit" value="Kittear">
+                
+                </form>
+            </div>
+        
+        {% else %}
+            <div>
+                <a href="ingreso_usuario" class="btn btn-outline-secondary btn-home"> Iniciar sesión</a>
+                <a href="crear_usuario" class="btn btn-outline-primary btn-home"> Crear usuario</a> 
+            </div>
+            
+        {% endif %}
+        
+        <br>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre de usuario</th>
+                    <th scope="col">Kito</th>
+                    <th scope="col">Votar</th>
+                    <th scope="col">Puntaje</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for kito in rankito %}
+                    <tr>
+                        <th scope="row">#</th>
+                        <td>{{ kito.usuario }}</td>
+                        <td>{{ kito.texto }}</td>
+                        <td>
+                            {% if usuario_logueado and kito.votable %}
+                                <form action="votar_mas_uno" method="POST" style="display: inline;">
+                                
+                                    <input type="hidden" name="kito" value="{{kito.texto}}">
+                                    <input type="submit" value="+1" class="btn btn-outline-primary">
+
+                                </form>
+
+                                <form action="votar_menos_uno" method="POST" style="display: inline;">
+                                
+                                    <input type="hidden" name="kito" value="{{kito.texto}}">
+                                    <input type="submit" value="-1" class="btn btn-outline-danger"">
+
+                                </form>
+                            {% endif %}
+                        </td>
+                        </td>
+                        <td>{{ kito.puntaje }}</td>
+                    </tr>
+
+                    
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <hr>
+    
+    <section class="footer-section">
+    
+        <img class="rankito-img" src="{{ url_for('static', filename='rankito-img.png') }}" alt="..">
+        
+        <h2 class="footer-question">¿Cuántas personas piensan igual que vos?</h2>
+    </section>
+
+    <script src=
+    "https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.min.js">
+    </script>
+
+{% endblock %}

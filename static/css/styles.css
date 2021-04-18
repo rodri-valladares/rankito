@@ -1,35 +1,71 @@
 body {
-  background-color: #d8e3e7;
+  background-color: rgb(243, 243, 243);
   text-align: center;
+  font-family: "Poppins", sans-serif;
 }
 
-a {
-  border-radius: 5rem;
-  padding: 1rem;
-  display: inline-block;
-  width: 200px;
-  font-weight: bold;
-  text-align: center;
-  text-decoration: none;
-  background-color: aquamarine;
-  color: white;
+hr {
+  border-style: none;
+  border-top-style: dotted;
+  border-width: 5px;
+  width: 10%;
+  color: grey;
+  margin: 50px auto;
 }
 
-a:hover {
-  color: #51c4d3;
+section {
+  margin: 30px auto;
 }
-
 /* ------------- CLASS SELECTORS ------------- */
-.buttons {
-  margin: 20px;
+.btn-home {
+  margin: auto 20px;
+}
+
+.footer-question {
+  display: inline-block;
+  margin: auto 20px;
+}
+
+.inicio-sesion {
+  margin: 20px auto;
+}
+
+.kitos {
+  display: inline-block;
+  font-size: 1.3rem;
+}
+
+.nuevo-kito {
+  margin: 20px 0;
 }
 
 .rankito-img {
-  width: 500px;
-  height: 500px;
+  border-radius: 3rem;
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+}
+
+.section-divider {
+  border-style: dotted;
+  border-radius: 0;
+  height: 0;
+  width: 10%;
 }
 
 .titulo-inicio {
-  font-family: "Montserrat", sans-serif;
-  font-size: 5rem;
+  font-family: "Karantina", cursive;
+  font-size: 8rem;
+}
+
+.titulo-inicio-sesion {
+  font-family: "Karantina", cursive;
+  font-size: 4.5rem;
+  margin: 20px auto;
+}
+
+.titulo-registro-usuario {
+  font-family: "Karantina", cursive;
+  font-size: 4.5rem;
+  margin: 20px auto;
 }

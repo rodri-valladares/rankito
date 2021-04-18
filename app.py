@@ -23,12 +23,18 @@ def home():
     for dato in datos:
         texto = dato[0].decode("utf-8")
         puntaje = int(dato[1])
-        votable = usuario_logueado != db.get(texto).decode("utf-8")
-        kito = {"texto": texto, "puntaje": puntaje, "votable": votable}
+        usuario = db.get(texto).decode("utf-8")
+        votable = usuario_logueado != usuario
+        kito = {
+            "texto": texto,
+            "puntaje": puntaje,
+            "votable": votable,
+            "usuario": usuario,
+        }
         rankito.append(kito)
 
     return render_template(
-        "index.html", usuario_logueado=usuario_logueado, rankito=rankito
+        "index.html", usuario_logueado=usuario_logueado, rankito=rankito,
     )
 
 

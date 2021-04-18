@@ -1,17 +1,38 @@
-<html>
-    <head>
+{% extends "base.html" %}
 
-    </head>
-    <body>
-        <form action="login" method="POST">
-            <label for="nombre">Ingrese su nombre de usuario: </label><br>
-            <input type="text" id="nombre" name="nombre">
-            <br>
-            <label for="contraseña">Ingrese su contraseña: </label> <br>
-            <input type="password" id="contraseña" name="contraseña">
-            <br>
-            <input type="submit">
-        </form>
-        {{error}}
-    </body>
-</html>
+
+{% block title %}
+Rankito - Home
+{% endblock %}
+
+
+{% block content %}
+
+
+    <h1 class="titulo-inicio-sesion">¡Ingresá para comenzar a kittear!</h1>
+    
+    <form action="login" method="POST">
+        
+        <div class="container inicio-sesion">
+            <div class="row justify-content-center">
+                <div class="col-md-6 my-auto">
+                    <label for="nombre" class="form-label">Nombre de usuario: </label>
+                    <input type="text" class="form-control" id="nombre" name="nombre"> <span style="color:red;">{{error}}</span>
+                </div>
+            </div>
+        
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <label for="contraseña" class="form-label">Contraseña:</label>
+                    <input type="password" class="form-control" id="contraseña" name="contraseña">
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-outline-primary">Login</button>
+
+    </form>
+
+    {{error}}
+
+{% endblock %}
