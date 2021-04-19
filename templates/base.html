@@ -38,15 +38,18 @@
           <li>
             <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
-          <li>
-            <a class="nav-link" href="/ingreso_usuario">Login</a>
-          </li>
-          <li>
-            <a class="nav-link" href="/logout">Logout</a>
-          </li>
+          {% if not usuario_logueado %}
           <li>
             <a class="nav-link" href="/crear_usuario">Register</a>
           </li>
+          <li>
+            <a class="nav-link" href="/ingreso_usuario">Login</a>
+          </li>
+          {% else %}
+          <li>
+            <a class="nav-link" href="/logout">Logout</a>
+          </li>
+          {% endif %}
         </ul>
       </div>
     </div>
