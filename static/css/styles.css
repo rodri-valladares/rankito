@@ -4,15 +4,6 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
-hr {
-  border-style: none;
-  border-top-style: dotted;
-  border-width: 5px;
-  width: 10%;
-  color: grey;
-  margin: 50px auto;
-}
-
 section {
   margin: 28px auto;
 }
@@ -51,6 +42,14 @@ section {
   border-radius: 0;
   height: 0;
   width: 10%;
+}
+
+.separador {
+  border-style: none;
+  border-top-style: dotted;
+  width: 10%;
+  color: grey;
+  margin: 50px auto;
 }
 
 .titulo-inicio {
