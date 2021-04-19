@@ -17,7 +17,7 @@ Rankito - Iniciar sesión
             <div class="row justify-content-center">
                 <div class="col-md-6 my-auto">
                     <label for="nombre" class="form-label">Nombre de usuario: </label>
-                    <input type="text" class="form-control" id="nombre" name="nombre"> <span style="color:red;">{{error}}</span>
+                    <input type="text" class="form-control" id="nombre" name="nombre"> 
                 </div>
             </div>
         
@@ -26,13 +26,17 @@ Rankito - Iniciar sesión
                     <label for="contraseña" class="form-label">Contraseña:</label>
                     <input type="password" class="form-control" id="contraseña" name="contraseña">
                 </div>
+            </div><br>
+       
+
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="alert alert-danger" role="alert">{{error}}</div>
+                </div>
             </div>
+        
+            <button type="submit" class="btn btn-outline-primary">Login</button>
         </div>
-
-        <button type="submit" class="btn btn-outline-primary">Login</button>
-
     </form>
-
-    {{error}}
 
 {% endblock %}
