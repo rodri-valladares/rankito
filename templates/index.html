@@ -45,36 +45,39 @@ Rankito - Home
                     <th scope="col">#</th>
                     <th scope="col">Nombre de usuario</th>
                     <th scope="col">Kito</th>
-                    <th scope="col">Votar</th>
                     <th scope="col">Puntaje</th>
+                    {% if usuario_logueado %}
+                    <th scope="col">Votar</th>
+                    {% endif %}
                 </tr>
             </thead>
 
             <tbody>
                 {% for kito in rankito %}
                     <tr>
-                        <th scope="row">#</th>
+                        <th scope="row">{{ kito.posicion }}</th>
                         <td>{{ kito.usuario }}</td>
                         <td>{{ kito.texto }}</td>
-                        <td>
-                            {% if usuario_logueado and kito.votable %}
-                                <form action="votar_mas_uno" method="POST" style="display: inline;">
-                                
-                                    <input type="hidden" name="kito" value="{{kito.texto}}">
-                                    <input type="submit" value="+1" class="btn btn-outline-primary">
-
-                                </form>
-
-                                <form action="votar_menos_uno" method="POST" style="display: inline;">
-                                
-                                    <input type="hidden" name="kito" value="{{kito.texto}}">
-                                    <input type="submit" value="-1" class="btn btn-outline-danger"">
-
-                                </form>
-                            {% endif %}
-                        </td>
-                        </td>
                         <td>{{ kito.puntaje }}</td>
+                        {% if usuario_logueado %}
+                            <td>
+                                {% if kito.votable %}
+                                    <form action="votar_mas_uno" method="POST" style="display: inline;">
+                                    
+                                        <input type="hidden" name="kito" value="{{kito.texto}}">
+                                        <input type="submit" value="+1" class="btn btn-outline-primary">
+
+                                    </form>
+
+                                    <form action="votar_menos_uno" method="POST" style="display: inline;">
+                                    
+                                        <input type="hidden" name="kito" value="{{kito.texto}}">
+                                        <input type="submit" value="-1" class="btn btn-outline-danger"">
+
+                                    </form>
+                                {% endif %}
+                            </td>
+                        {% endif %}
                     </tr>
 
                     

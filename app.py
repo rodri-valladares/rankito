@@ -20,6 +20,8 @@ def home():
     datos = db.zrevrange("rankito", 0, -1, withscores=True)
     rankito = []
 
+    posicion = 1
+
     for dato in datos:
         texto = dato[0].decode("utf-8")
         puntaje = int(dato[1])
@@ -30,8 +32,10 @@ def home():
             "puntaje": puntaje,
             "votable": votable,
             "usuario": usuario,
+            "posicion": posicion,
         }
         rankito.append(kito)
+        posicion += 1
 
     return render_template(
         "index.html", usuario_logueado=usuario_logueado, rankito=rankito,
