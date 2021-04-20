@@ -15,7 +15,7 @@ Rankito - Registro
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <label for="nombre" class="form-label">Ingrese su nombre: </label>
-                    <input type="text" class="form-control" id="nombre" name="nombre"> <span style="color:red;">{{error}}</span>
+                    <input type="text" class="form-control" id="nombre" name="nombre">
                 </div>
             </div>
         
@@ -25,6 +25,17 @@ Rankito - Registro
                     <input type="password" class="form-control" id="contraseña" name="contraseña">
                 </div>
             </div>
+
+            <br>
+
+            {% if error %}
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="alert alert-danger" role="alert">{{error}}</div>
+                    </div>
+                </div>
+            {% endif %}
+
         </div>
         
         <button type="submit" class="btn btn-outline-primary">Registrarme</button>
